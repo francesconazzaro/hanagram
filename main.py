@@ -7,13 +7,13 @@ import hanabi
 import draw
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
-BACKGROUND_COLORS_RGB = itertools.cycle(
+BACKGROUND_COLORS_RGB = itertools.cycle((
     (20, 20, 20),  # black
     (100, 20, 20),  # red
     (10, 50, 10),  # green
     (15, 30, 74),  # blue
     (75, 0, 70),  # purple
-)
+))
 
 class ChatGame:
     def __init__(self, chat_id, admin):
