@@ -124,7 +124,11 @@ def send_keyboard(bot, chat_id, keyboard_type):
         
         keyboard = InlineKeyboardMarkup(inline_keyboard=keyboard)
         if chat_game.user_to_message[user_id] is not None:
-            edit_message(chat_game, bot, user_id, player + ", choose an action", keyboard)
+            # quick fix for unkown crash when user try to /refresh
+            try:
+                edit_message(chat_game, bot, user_id, player + ", choose an action", keyboard)
+            except telepot.exception.TelegramError:
+                chat_game.user_to_message[user_id] = bot.sendMessage(user_id, player + ", it's your turn", reply_markup=keyboard)
         else:
             chat_game.user_to_message[user_id] = bot.sendMessage(user_id, player + ", it's your turn", reply_markup=keyboard)
     
