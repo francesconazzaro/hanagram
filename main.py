@@ -331,6 +331,15 @@ def handle_message(message_object):
         start_game(server, chat_id, user_id)
     elif text == '/refresh':
         pass
+    elif text == '/active_games':
+        server.bot.sendMessage(chat_id, f"Active games: {len(server.games.keys())}")
+        return
+    elif text == '/list_active_games':
+        server.bot.sendMessage(chat_id, f"Active games: {len(server.games.keys())}")
+        for game in server.games.values():
+            players = '\n'.join(game.player_to_user.keys())
+            server.bot.sendMessage(chat_id, f"*{game.chat_id}*\n{players}", parse_mode="Markdown")
+        return
     else:
         return
 
